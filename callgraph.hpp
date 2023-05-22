@@ -1,35 +1,23 @@
 #ifndef CALLGRAPH_HPP
 #define CALLGRAPH_HPP
 
-#include <vector>
 #include <set>
+
 #include "macros.hpp"
-#include "vertex.hpp"
-#include "edge.hpp"
+
+class Edge;
+class Cluster;
 
 class CallGraph {
-public:
-    std::set<Vertex> _vertexes;
+   private:
+    std::set<uint> _clusters;
     std::set<Edge> _edges;
 
-    Vertex *findVertex(const Vertex &vertex);
-    Edge *findEdge(const Edge &edge);
-public:
-    CallGraph() {}
-    CallGraph(const CallGraph &callGraph) {
-        _vertexes = callGraph._vertexes;
-        _edges = callGraph._edges;
-    }
+   public:
+    void addCluster(Cluster &cluster);
+    void addEdge(Edge &edge);
 
-    CallGraph(CallGraph &&callGraph) {
-        _vertexes = callGraph._vertexes;
-        _edges = callGraph._edges;
-    }
-
-    void addVertex(const Vertex &vertex);
-    void addEdge(const Edge &edge);
-    const Edge &getEdge(const Vertex &from, const Vertex &to);
+    const std::set<Edge> &getEdges() const;
 };
 
-
-#endif // CALLGRAPH_HPP
+#endif  // CALLGRAPH_HPP

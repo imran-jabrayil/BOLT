@@ -1,6 +1,7 @@
 #ifndef MACROS_HPP
 #define MACROS_HPP
 
-typedef unsigned int uint;
+typedef unsigned uint;
+typedef unsigned long long ull;
 
-#endif // MACROS_HPP
+#endif  // MACROS_HPP

@@ -1,42 +1,25 @@
-#include "callgraph.hpp"
-#include <cassert>
+#include "callGraph.hpp"
 
-Vertex *CallGraph::findVertex(const Vertex &vertex) {
-    for (auto iter = _vertexes.begin(); iter != _vertexes.end(); ++iter) {
-        Vertex &result = const_cast<Vertex &>(*iter);
-        if (result == vertex)
-            return &result;
-    }
-    return nullptr;
+#include "Cluster.hpp"
+#include "Edge.hpp"
+
+void CallGraph::addCluster(Cluster &cluster) {
+    Cluster::addCluster(cluster);
+    _clusters.insert(cluster.id());
 }
 
-Edge *CallGraph::findEdge(const Edge &edge) {
+void CallGraph::addEdge(Edge &edge) {
     for (auto iter = _edges.begin(); iter != _edges.end(); ++iter) {
-        Edge &result = const_cast<Edge &>(*iter);
-        if (result == edge)
-            return &result;
+        Edge &found = const_cast<Edge &>(*iter);
+        if (found == edge) {
+            found.addWeight(edge.weight());
+            return;
+        }
     }
-    return nullptr;
+
+    _edges.insert(edge);
+    _clusters.insert(edge.getClusterFrom().id());
+    _clusters.insert(edge.getClusterTo().id());
 }
 
-void CallGraph::addEdge(const Edge &edge) {
-    Edge *found = findEdge(edge);
-    if (found != nullptr) {
-        found->weight += edge.weight;
-    } else {
-        _edges.insert(edge);
-    }
-}
-
-void CallGraph::addVertex(const Vertex &vertex) {
-    Vertex *found = findVertex(vertex);
-    if (found == nullptr)
-        _vertexes.insert(vertex);
-}
-
-const Edge &CallGraph::getEdge(const Vertex &from, const Vertex &to) {
-    const Edge edge(from, to, 1);
-    Edge *found = findEdge(edge);
-    assert(found != nullptr);
-    return *found;
-}
+const std::set<Edge> &CallGraph::getEdges() const { return _edges; }

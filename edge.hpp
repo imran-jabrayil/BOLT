@@ -1,27 +1,33 @@
 #ifndef EDGE_HPP
 #define EDGE_HPP
 
+#include <iostream>
+
 #include "macros.hpp"
-#include "vertex.hpp"
+
+class Cluster;
 
 class Edge {
-public:
-    Vertex src;
-    Vertex dest;
-    uint weight;
+   private:
+    Cluster& _from;
+    Cluster& _to;
+    uint _weight;
 
-    Edge(const Vertex &src, const Vertex &dest, uint weight) {
-        this->src = src;
-        this->dest = dest;
-        this->weight = weight;
-    }
+   public:
+    Edge(Cluster& from, Cluster& to);
+    Edge(Cluster& from, Cluster& to, uint weight);
 
-    bool operator==(const Edge &edge) const { return src == edge.src && dest == edge.dest; }
-    bool operator<(const Edge &edge)  const { 
-        return src < edge.src || 
-               src == edge.src && dest < edge.dest || 
-               src == edge.src && dest == edge.dest && weight < edge.weight; 
-    }
+    void addWeight();
+    void addWeight(uint weight);
+
+    Cluster& getClusterFrom();
+    Cluster& getClusterTo();
+
+    uint weight();
+    bool operator==(const Edge& edge) const;
+    bool operator<(const Edge& edge) const;
+
+    friend std::ostream& operator<<(std::ostream& os, const Edge& edge);
 };
 
-#endif // EDGE_HPP
+#endif  // EDGE_HPP
