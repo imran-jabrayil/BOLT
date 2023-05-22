@@ -2,14 +2,15 @@
 #define CALLGRAPH_HPP
 
 #include <vector>
+#include <set>
 #include "macros.hpp"
 #include "vertex.hpp"
 #include "edge.hpp"
 
 class CallGraph {
 public:
-    std::vector<Vertex> _vertexes;
-    std::vector<Edge> _edges;
+    std::set<Vertex> _vertexes;
+    std::set<Edge> _edges;
 
     Vertex *findVertex(const Vertex &vertex);
     Edge *findEdge(const Edge &edge);

@@ -16,7 +16,12 @@ public:
         this->weight = weight;
     }
 
-    bool operator==(const Edge &edge) { return src == edge.src && dest == edge.dest; }
+    bool operator==(const Edge &edge) const { return src == edge.src && dest == edge.dest; }
+    bool operator<(const Edge &edge)  const { 
+        return src < edge.src || 
+               src == edge.src && dest < edge.dest || 
+               src == edge.src && dest == edge.dest && weight < edge.weight; 
+    }
 };
 
 #endif // EDGE_HPP

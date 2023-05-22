@@ -2,16 +2,20 @@
 #include <cassert>
 
 Vertex *CallGraph::findVertex(const Vertex &vertex) {
-    for (uint i = 0; i < _vertexes.size(); ++i)
-        if (_vertexes[i] == vertex)
-            return &_vertexes[i];
+    for (auto iter = _vertexes.begin(); iter != _vertexes.end(); ++iter) {
+        Vertex &result = const_cast<Vertex &>(*iter);
+        if (result == vertex)
+            return &result;
+    }
     return nullptr;
 }
 
 Edge *CallGraph::findEdge(const Edge &edge) {
-    for (uint i = 0; i < _edges.size(); ++i)
-        if (_edges[i] == edge)
-            return &_edges[i];
+    for (auto iter = _edges.begin(); iter != _edges.end(); ++iter) {
+        Edge &result = const_cast<Edge &>(*iter);
+        if (result == edge)
+            return &result;
+    }
     return nullptr;
 }
 
@@ -20,14 +24,14 @@ void CallGraph::addEdge(const Edge &edge) {
     if (found != nullptr) {
         found->weight += edge.weight;
     } else {
-        _edges.push_back(edge);
+        _edges.insert(edge);
     }
 }
 
 void CallGraph::addVertex(const Vertex &vertex) {
     Vertex *found = findVertex(vertex);
     if (found == nullptr)
-        _vertexes.push_back(vertex);
+        _vertexes.insert(vertex);
 }
 
 const Edge &CallGraph::getEdge(const Vertex &from, const Vertex &to) {

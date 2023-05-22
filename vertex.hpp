@@ -23,7 +23,11 @@ public:
         methodId = vertex.methodId;
     }
 
-    bool operator==(const Vertex &vertex) { return klassId == vertex.klassId && methodId == vertex.methodId; }
+    bool operator==(const Vertex &vertex) const { return klassId == vertex.klassId && methodId == vertex.methodId; }
+    bool operator<(const Vertex &vertex)  const { 
+        return klassId < vertex.klassId || 
+               klassId == vertex.klassId && methodId < vertex.methodId; 
+    }
 };
 
 #endif // VERTEX_HPP
