@@ -16,11 +16,11 @@ void Edge::addWeight() { ++_weight; }
 
 void Edge::addWeight(uint weight) { _weight += weight; }
 
-uint Edge::getFromClusterId() {
+uint Edge::getFromClusterId() const {
     return _fromClusterId;
 }
 
-uint Edge::getToClusterId() {
+uint Edge::getToClusterId() const {
     return _toClusterId;
 }
 
@@ -32,9 +32,9 @@ void Edge::setToClusterId(uint id) {
     _toClusterId = id;
 }
 
-uint Edge::id() { return _id; }
+uint Edge::id() const { return _id; }
 
-uint Edge::weight() { return _weight; }
+uint Edge::weight() const { return _weight; }
 
 void Edge::resetIds() {
     idCounter = 1;

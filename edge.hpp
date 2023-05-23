@@ -22,14 +22,14 @@ class Edge {
     void addWeight();
     void addWeight(uint weight);
 
-    uint getFromClusterId();
-    uint getToClusterId();
+    uint getFromClusterId() const;
+    uint getToClusterId() const;
 
     void setFromClusterId(uint id);
     void setToClusterId(uint id);
 
-    uint id();
-    uint weight();
+    uint id() const;
+    uint weight() const;
 
     static void resetIds();
 

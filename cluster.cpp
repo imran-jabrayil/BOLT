@@ -29,7 +29,7 @@ void Cluster::addCluster(Cluster &cluster) {
         clusters.insert(std::make_pair(cluster._id, cluster));
 }
 
-uint Cluster::id() { return _id; }
+uint Cluster::id() const { return _id; }
 
 Cluster *Cluster::getClusterById(uint id) {
     auto iter = clusters.find(id);

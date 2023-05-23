@@ -20,7 +20,7 @@ class Cluster {
 
     const std::vector<uint> &getVertexIds();
 
-    uint id();
+    uint id() const;
     static Cluster *getClusterById(uint id);
     static std::map<uint, Cluster> getClusters();
 
