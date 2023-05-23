@@ -1,6 +1,7 @@
 #ifndef CALLGRAPH_HPP
 #define CALLGRAPH_HPP
 
+#include <map>
 #include <set>
 
 #include "macros.hpp"
@@ -18,6 +19,7 @@ class CallGraph {
     void addEdge(Edge &edge);
 
     const std::set<Edge> &getEdges() const;
+    std::vector<uint> getOrder();
 };
 
 #endif  // CALLGRAPH_HPP

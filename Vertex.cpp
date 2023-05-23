@@ -1,4 +1,4 @@
-#include "Vertex.hpp"
+#include "vertex.hpp"
 
 bool Vertex::operator==(const Vertex &vertex) const {
     return klassId == vertex.klassId && methodId == vertex.methodId;

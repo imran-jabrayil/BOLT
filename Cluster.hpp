@@ -18,10 +18,10 @@ class Cluster {
 
     static void addCluster(Cluster &cluster);
 
-    const std::vector<uint> &getVertexOrder();
+    const std::vector<uint> &getVertexIds();
 
     uint id();
-    static Cluster &getClusterById(uint id);
+    static Cluster *getClusterById(uint id);
     static std::map<uint, Cluster> getClusters();
 
     bool operator==(const Cluster &cluster) const;

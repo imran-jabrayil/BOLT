@@ -1,10 +1,14 @@
-#include "Edge.hpp"
+#include "edge.hpp"
 
-#include "Cluster.hpp"
+#include "cluster.hpp"
 
-Edge::Edge(Cluster& from, Cluster& to) : _from(from), _to(to) { _weight = 1; }
+static uint counter = 0;
 
-Edge::Edge(Cluster& from, Cluster& to, uint weight) : Edge(from, to) {
+Edge::Edge(uint fromClusterId, uint toClusterId) : _fromClusterId(fromClusterId), _toClusterId(toClusterId), _id(counter++) {
+    _weight = 1;
+}
+
+Edge::Edge(uint fromClusterId, uint toClusterId, uint weight) : Edge(fromClusterId, toClusterId) {
     _weight = weight;
 }
 
@@ -12,14 +16,28 @@ void Edge::addWeight() { ++_weight; }
 
 void Edge::addWeight(uint weight) { _weight += weight; }
 
-Cluster& Edge::getClusterFrom() { return _from; }
+uint Edge::getFromClusterId() {
+    return _fromClusterId;
+}
 
-Cluster& Edge::getClusterTo() { return _to; }
+uint Edge::getToClusterId() {
+    return _toClusterId;
+}
+
+void Edge::setFromClusterId(uint id) {
+    _fromClusterId = id;
+}
+
+void Edge::setToClusterId(uint id) {
+    _toClusterId = id;
+}
+
+uint Edge::id() { return _id; }
 
 uint Edge::weight() { return _weight; }
 
 bool Edge::operator==(const Edge& edge) const {
-    return _from.id() == edge._from.id() && _to.id() == edge._to.id();
+    return _fromClusterId == edge._fromClusterId && _toClusterId == edge._toClusterId;
 }
 
 bool Edge::operator<(const Edge& edge) const {
@@ -27,5 +45,5 @@ bool Edge::operator<(const Edge& edge) const {
 }  // for std::set sort
 
 std::ostream& operator<<(std::ostream& os, const Edge& edge) {
-    return os << edge._from.id() << " " << edge._to.id() << " " << edge._weight;
+    return os << edge._fromClusterId << " " << edge._toClusterId << " " << edge._weight;
 }

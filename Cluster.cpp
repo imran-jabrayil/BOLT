@@ -1,6 +1,6 @@
-#include "Cluster.hpp"
+#include "cluster.hpp"
 
-static uint idCounter = 0;
+static uint idCounter = 1;
 static std::map<uint, Cluster> clusters;
 
 Cluster::Cluster(uint id, uint vertexId) {
@@ -13,7 +13,7 @@ void Cluster::addVertex(uint clusterId, uint vertexId) {
     if (iter == clusters.end()) {
         addVertex(vertexId);
     } else {
-        Cluster &cluster = (*iter).second;
+        Cluster &cluster = iter->second;
         cluster._vertexIds.push_back(vertexId);
     }
 }
@@ -21,7 +21,7 @@ void Cluster::addVertex(uint clusterId, uint vertexId) {
 Cluster &Cluster::addVertex(uint vertexId) {
     uint id = idCounter++;
     clusters.insert(std::make_pair(id, Cluster(id, vertexId)));
-    return (*clusters.find(id)).second;
+    return clusters.find(id)->second;
 }
 
 void Cluster::addCluster(Cluster &cluster) {
@@ -31,16 +31,16 @@ void Cluster::addCluster(Cluster &cluster) {
 
 uint Cluster::id() { return _id; }
 
-Cluster *getClusterById(uint id) {
+Cluster *Cluster::getClusterById(uint id) {
     auto iter = clusters.find(id);
     if (iter == clusters.end()) return nullptr;
 
-    return &(*iter).second;
+    return &iter->second;
 }
 
 std::map<uint, Cluster> Cluster::getClusters() { return clusters; }
 
-const std::vector<uint> &Cluster::getVertexOrder() { return _vertexIds; }
+const std::vector<uint> &Cluster::getVertexIds() { return _vertexIds; }
 
 bool Cluster::operator==(const Cluster &cluster) const {
     return _id == cluster._id;
