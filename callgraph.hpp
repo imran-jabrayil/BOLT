@@ -15,6 +15,7 @@ class CallGraph {
     std::set<Edge> _edges;
 
    public:
+    CallGraph();
     void addCluster(Cluster &cluster);
     void addEdge(Edge &edge);
 

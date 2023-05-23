@@ -2,9 +2,9 @@
 
 #include "cluster.hpp"
 
-static uint counter = 0;
+static uint idCounter = 0;
 
-Edge::Edge(uint fromClusterId, uint toClusterId) : _fromClusterId(fromClusterId), _toClusterId(toClusterId), _id(counter++) {
+Edge::Edge(uint fromClusterId, uint toClusterId) : _fromClusterId(fromClusterId), _toClusterId(toClusterId), _id(idCounter++) {
     _weight = 1;
 }
 
@@ -35,6 +35,10 @@ void Edge::setToClusterId(uint id) {
 uint Edge::id() { return _id; }
 
 uint Edge::weight() { return _weight; }
+
+void Edge::resetIds() {
+    idCounter = 1;
+}
 
 bool Edge::operator==(const Edge& edge) const {
     return _fromClusterId == edge._fromClusterId && _toClusterId == edge._toClusterId;

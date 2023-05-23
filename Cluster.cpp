@@ -42,6 +42,11 @@ std::map<uint, Cluster> Cluster::getClusters() { return clusters; }
 
 const std::vector<uint> &Cluster::getVertexIds() { return _vertexIds; }
 
+void Cluster::resetIds() {
+    idCounter = 1;
+    clusters.clear();
+}
+
 bool Cluster::operator==(const Cluster &cluster) const {
     return _id == cluster._id;
 }

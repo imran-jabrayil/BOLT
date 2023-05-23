@@ -9,16 +9,25 @@ CallGraph generateCallGraph1();
 CallGraph generateCallGraph2();
 
 int main(int argc, char *argv[]) {
-    CallGraph callGraph = generateCallGraph1();
+    {
+        std::cout << "\tTest case 1" << std::endl;
+        CallGraph callGraph = generateCallGraph1();
 
-//    const std::set<Edge> &edges = callGraph.getEdges();
-//    for (const auto & edge : edges)
-//        std::cout << edge << std::endl;
+        auto order = callGraph.getOrder();
+        std::cout << "Order: ";
+        for (uint id : order) std::cout << id << " ";
+        std::cout << std::endl;
+    }
 
-    auto order = callGraph.getOrder();
-    std::cout << "Order: ";
-    for (uint id : order) std::cout << id << " ";
-    std::cout << std::endl;
+    {
+        std::cout << "\tTest case 2" << std::endl;
+        CallGraph callGraph = generateCallGraph2();
+
+        auto order = callGraph.getOrder();
+        std::cout << "Order: ";
+        for (uint id : order) std::cout << id << " ";
+        std::cout << std::endl;
+    }
 
     return 0;
 }

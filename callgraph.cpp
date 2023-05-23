@@ -5,6 +5,11 @@
 #include "cluster.hpp"
 #include "edge.hpp"
 
+CallGraph::CallGraph() {
+    Cluster::resetIds();
+    Edge::resetIds();
+}
+
 void CallGraph::addCluster(Cluster &cluster) {
     Cluster::addCluster(cluster);
     _clusters.insert(cluster.id());

@@ -31,6 +31,8 @@ class Edge {
     uint id();
     uint weight();
 
+    static void resetIds();
+
     bool operator==(const Edge& edge) const;
     bool operator<(const Edge& edge) const;
 

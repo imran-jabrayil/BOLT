@@ -24,6 +24,8 @@ class Cluster {
     static Cluster *getClusterById(uint id);
     static std::map<uint, Cluster> getClusters();
 
+    static void resetIds();
+
     bool operator==(const Cluster &cluster) const;
 };
 
