@@ -1,7 +1,7 @@
 #include <iostream>
 #include <map>
 
-#include "callGraph.hpp"
+#include "callgraph.hpp"
 #include "cluster.hpp"
 #include "edge.hpp"
 
